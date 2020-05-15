@@ -77,8 +77,20 @@
         </div>
       </div>
 
-      <div class="container container-fluid">
+
+      <h3>Mail Index</h3>
+      <p>Choose your mail index</p>
+
+        <div class="btn-group" role="group" aria-label="Mail Index Button Group">
+          <button type="button" class="btn btn-primary" id="mailIndex0">0</button>
+          <button type="button" class="btn btn-primary active" id="mailIndex1">1</button>
+          <button type="button" class="btn btn-primary" id="mailIndex2">2</button>
+          <button type="button" class="btn btn-primary" id="mailIndex3">3</button>
+          <button type="button" class="btn btn-primary" id="mailIndex4">4</button>
+          <button type="button" class="btn btn-primary" id="mailIndex5">5</button>
+        </div>
         
+        <h5 class="my-2">Current Mail Index = <span id="currentMI">1</span></h5>
         <!-----------------------------------  MTH 202  --------------------------------->
         <hr class="spacer" id="mth202">
 
@@ -655,19 +667,19 @@
 
           </div>
         </div>
-        
-      </div>
-      <footer>
-        <div class="jumbotron jumbotron-fluid mb-0 text-center page-footer">
-          <div class="container">
-            <h5>Made with <a href="https://hackerthemes.com/bootstrap-themes/neon-glow/" target="_blank">Neon Glow</a></h5>
-            <p>Questions? Queries? Feedback? <a href="mailto:purva.parmar@students.iiserpune.ac.in">Send a Mail</a>.</p>
-            <h5><a href="https://www.github.com/TheReconPilot/" target="_blank"><i class="fab fa-github"></i> TheReconPilot</a></h5>
-            <br><br>
-            <div class="hal-9000"></div>
+        <footer>
+          <div class="jumbotron jumbotron-fluid mb-0 text-center page-footer">
+            <div class="container">
+              <h5>Made with <a href="https://hackerthemes.com/bootstrap-themes/neon-glow/" target="_blank">Neon Glow</a></h5>
+              <p>Questions? Queries? Feedback? <a href="mailto:purva.parmar@students.iiserpune.ac.in">Send a Mail</a>.</p>
+              <h5><a href="https://www.github.com/TheReconPilot/" target="_blank"><i class="fab fa-github"></i> TheReconPilot</a></h5>
+              <br><br>
+              <div class="hal-9000"></div>
+            </div>
           </div>
-        </div>
-      </footer>
+        </footer>
+      </div>
+      
     </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -677,10 +689,9 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
     <script>
-      let timeout;
 
       function loadFunction() {
-          timeout = setTimeout(showPage, 1000);
+          let timeout = setTimeout(showPage, 1000);
       }
 
       function showPage() {
@@ -688,7 +699,23 @@
 
           document.querySelector("#spinner").style.display = "none";
           actualBody.style.display = "block";
-}
+      }
+
+      currentIndex = 1;
+
+      $("[id^=mailIndex]").click(function() {
+
+          $("#mailIndex" + currentIndex).toggleClass("active");
+
+          let index = $(this).html();
+          let re = new RegExp(index);
+          $("body").html($("body").html().replace(/\/\d+\//g, re));
+
+          $("#currentMI").html(index);
+          
+          $("#mailIndex" + index).toggleClass("active");
+          currentIndex = index;
+      });
     </script>
 
   </body>
