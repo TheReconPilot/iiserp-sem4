@@ -1,0 +1,44 @@
+body {
+    position: relative;
+}
+
+nav, .page-footer {
+    background: #0c0d16;
+}
+
+.navbar-toggler-icon {
+    color: lime;
+}
+
+#entireBody {
+    margin-top: 4rem;
+}
+
+a {
+    color: lime;
+}
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+    color: black;
+    background-color: lime;
+}
+
+hr {
+    border-top: 1px solid white;
+    margin-top: 4rem;
+}
+
+button {
+    margin: 3px;
+}
+
+.spacer {
+    border: 0;
+    margin: 4rem;
+}
+
+.page-footer {
+    margin-top: 3rem;
+    border-top: 1px solid #714cdf;
+    border-radius: 0;
+}
