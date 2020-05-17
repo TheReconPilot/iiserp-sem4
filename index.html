@@ -735,6 +735,9 @@
       }
 
       function changeIndex(newIndex) {
+        let re = new RegExp(newIndex);
+        $("body").html($("body").html().replace(/\/\d+\//g, re));
+
         currentIndex = $("#currentMI").html();
         $("#mailIndex" + currentIndex).toggleClass("active");
         $("#mailIndex" + newIndex).toggleClass("active");
@@ -757,8 +760,6 @@
 
       $("[id^=mailIndex]").click(function() {
           let index = $(this).html();
-          let re = new RegExp(index);
-          $("body").html($("body").html().replace(/\/\d+\//g, re));
           changeIndex(index);
       });
     </script>
