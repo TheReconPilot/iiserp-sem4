@@ -703,6 +703,45 @@
 
     <script>
 
+
+      function setCookie(cname, cvalue, exdays) {
+        var d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        var expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+      }
+      
+      function getCookie(cname) {
+        var name = cname + "=";
+        var decodedCookie = decodeURIComponent(document.cookie);
+        var ca = decodedCookie.split(';');
+        for(var i = 0; i < ca.length; i++) {
+          var c = ca[i];
+          while (c.charAt(0) == ' ') {
+            c = c.substring(1);
+          }
+          if (c.indexOf(name) == 0) {
+            return c.substring(name.length, c.length);
+          }
+        }
+        return "";
+      }
+
+      function checkCookie() {
+        var mi = getCookie("mailIndex");
+        if (mi != "") {
+          changeIndex(mi);
+        }
+      }
+
+      function changeIndex(newIndex) {
+        currentIndex = $("#currentMI").html();
+        $("#mailIndex" + currentIndex).toggleClass("active");
+        $("#mailIndex" + newIndex).toggleClass("active");
+        $("#currentMI").html(newIndex);
+        setCookie("mailIndex", newIndex, 30);
+      }
+
       function loadFunction() {
           let timeout = setTimeout(showPage, 1000);
       }
@@ -712,22 +751,15 @@
 
           document.querySelector("#spinner").style.display = "none";
           actualBody.style.display = "block";
+          checkCookie();
       }
 
-      currentIndex = 1;
 
       $("[id^=mailIndex]").click(function() {
-
-          $("#mailIndex" + currentIndex).toggleClass("active");
-
           let index = $(this).html();
           let re = new RegExp(index);
           $("body").html($("body").html().replace(/\/\d+\//g, re));
-
-          $("#currentMI").html(index);
-          
-          $("#mailIndex" + index).toggleClass("active");
-          currentIndex = index;
+          changeIndex(index);
       });
     </script>
 
